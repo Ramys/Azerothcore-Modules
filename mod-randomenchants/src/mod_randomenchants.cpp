@@ -18,9 +18,9 @@ bool Looted = 0;
 bool QuestReward = 0;
 uint32 HighQuality = 5;
 uint32 LowQuality = 1;
-uint32 Chance1 = 70;
-uint32 Chance2 = 65;
-uint32 Chance3 = 60;
+uint32 Chance1 = 50;
+uint32 Chance2 = 45;
+uint32 Chance3 = 40;
 
 class REConfig : public WorldScript
 {
@@ -53,11 +53,11 @@ public:
         Crafted = sConfigMgr->GetBoolDefault("RandomEnchants.OnCreate", 1);
         Looted = sConfigMgr->GetBoolDefault("RandomEnchants.OnLoot", 1);
         QuestReward = sConfigMgr->GetBoolDefault("RandomEnchants.OnQuestReward", 1);
-        HighQuality = sConfigMgr->GetIntDefault("RandomEnchants.HighQuality", 1);
+        HighQuality = sConfigMgr->GetIntDefault("RandomEnchants.HighQuality", 5);
         LowQuality = sConfigMgr->GetIntDefault("RandomEnchants.LowQuality", 1);
-        Chance1 = sConfigMgr->GetIntDefault("RandomEnchants.Chance1", 70);
-        Chance2 = sConfigMgr->GetIntDefault("RandomEnchants.Chance2", 65);
-        Chance3 = sConfigMgr->GetIntDefault("RandomEnchants.Chance3", 60);
+        Chance1 = sConfigMgr->GetIntDefault("RandomEnchants.Chance1", 55);
+        Chance2 = sConfigMgr->GetIntDefault("RandomEnchants.Chance2", 50);
+        Chance3 = sConfigMgr->GetIntDefault("RandomEnchants.Chance3", 45);
 
         // Sanitize
         if (HighQuality > 5) { HighQuality = 5; }

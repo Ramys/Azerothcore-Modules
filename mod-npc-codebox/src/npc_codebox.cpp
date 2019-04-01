@@ -90,7 +90,7 @@ public:
     void OnLogin(Player* player)
     {
         // Announce Module
-        if (sConfigMgr->GetBoolDefault("CodeboxNPC.Announce", true))
+        if (sConfigMgr->GetBoolDefault("CodeboxNPC.Announce", false))
         {
             ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00CodeboxNPC |rmodule.");
         }

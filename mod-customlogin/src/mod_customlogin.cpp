@@ -141,7 +141,7 @@ public:
         {
             if (LoginAnnounceModule)
             {
-                ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00CustomLogin |rmodule.");
+                ChatHandler(player->GetSession()).SendSysMessage("");
             }
         }
     }
@@ -364,7 +364,7 @@ public:
 
                 // Inform the player they have new items
                 std::ostringstream ss;
-                ss << "|cffFF8000[|cFFBDB76BCL|cffFF8000] The outfitter has placed |cFFBDB76BHeirloom Gear|cffFF8000 in your backpack!";
+                ss << "|cffFF8000[|cFFBDB76BCL|cffFF8000] The Owner has placed |cFFBDB76Ba surprise|cffFF8000 in your backpack!";
                 ChatHandler(player->GetSession()).SendSysMessage(ss.str().c_str());
             }
 

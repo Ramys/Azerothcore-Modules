@@ -1,3 +1,4 @@
+
 /*
 
 # Buffer NPC
@@ -253,7 +254,7 @@ public:
             } // 40-49
             else if (PlayerLevel >= 50 && PlayerLevel < 60)
             {
-                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(48162)
+                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(43939)
                 player->CastSpell(player, vecBuffs[2], true); //Greater Blessing of Kings(43223)
                 player->CastSpell(player, vecBuffs[3], true); //Mark of the Wild(48469)
                 player->CastSpell(player, vecBuffs[4], true); //Prayer of Spirit(48074)
@@ -263,7 +264,7 @@ public:
             } // 50-59
             else if (PlayerLevel >= 60 && PlayerLevel < 70)
             {
-                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(48162)
+                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(43939)
                 player->CastSpell(player, vecBuffs[2], true); //Greater Blessing of Kings(43223)
                 player->CastSpell(player, vecBuffs[3], true); //Mark of the Wild(48469)
                 player->CastSpell(player, vecBuffs[4], true); //Prayer of Spirit(48074)
@@ -273,7 +274,7 @@ public:
             } // 60-69
             else if (PlayerLevel >= 70 && PlayerLevel < 80)
             {
-                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(48162)
+                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(43939)
                 player->CastSpell(player, vecBuffs[2], true); //Greater Blessing of Kings(43223)
                 player->CastSpell(player, vecBuffs[3], true); //Mark of the Wild(48469)
                 player->CastSpell(player, vecBuffs[4], true); //Prayer of Spirit(48074)
@@ -283,7 +284,7 @@ public:
             } // 70-79
             else
             {
-                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(48162)
+                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(43939)
                 player->CastSpell(player, vecBuffs[2], true); //Greater Blessing of Kings(43223)
                 player->CastSpell(player, vecBuffs[3], true); //Mark of the Wild(48469)
                 player->CastSpell(player, vecBuffs[4], true); //Prayer of Spirit(48074)
