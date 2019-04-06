@@ -9,8 +9,8 @@
 
 enum Vendors
 {
-    NPC_VENDOR_A    = 54,
-    NPC_VENDOR_H    = 3163,
+    NPC_VENDOR_A    = 55002,
+    NPC_VENDOR_H    = 55002,
     NPC_AUCTION_H   = 9856,
     NPC_AUCTION_A   = 8670
 };
@@ -248,7 +248,7 @@ public:
                 player->PlayerTalkClass->ClearMenus();
 
                 if (sConfigMgr->GetBoolDefault("Vendor", true))
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Vendor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Premium Services", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
 
                 if (sConfigMgr->GetBoolDefault("MailBox", true))
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Mail Box", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
