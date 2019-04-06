@@ -119,14 +119,12 @@ public:
 
     BufferAnnounce() : PlayerScript("BufferAnnounce") {}
 
-    void OnLogin(Player* player)
-    {
-        // Announce Module
-        if (BFAnnounceModule)
-        {
-            ChatHandler(player->GetSession()).SendSysMessage("");
-        }
-    }
+	void OnLogin(Player *Player)
+	{
+		if (sConfigMgr->GetBoolDefault("Buff.Announce", true)) {
+			ChatHandler(Player->GetSession()).SendSysMessage("This server is running the |cff4CFF00BufferNPC |rmodule.");
+		}
+	}
 };
 
 class buff_npc : public CreatureScript
@@ -198,13 +196,11 @@ public:
         }
 
         // Cure Resurrection Sickness
-        if (BuffCureRes && player->HasAura(15007))
-        {
-            player->RemoveAura(15007, true);
-            std::ostringstream res;
-            res << "The aura of death has been lifted from you " << PlayerName << ". Watch yourself out there!";
-            creature->MonsterWhisper(res.str().c_str(), player);
-        }
+		if (player->HasAura(15007))
+			player->RemoveAura(15007);
+		player->GetSession()->SendNotification("|cffFFFFFFRez Sickness succesfully removed!");
+		player->CastSpell(player, 31726);
+		
 
         // Are we buffing based on level
         if (BuffByLevel == true)
