@@ -115,7 +115,7 @@ public:
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, GOSSIP_TEXT_TRAIN, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
 
         if (sConfigMgr->GetBoolDefault("PlayerInteraction", true))
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Player interactions", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Premium Services", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
 
@@ -337,7 +337,7 @@ public:
             std::string cfg_file = conf_path + "/premium.conf";            
             
 #if PLATFORM == PLATFORM_WINDOWS
-            cfg_file = "my_custom.conf";
+            cfg_file = "premium.conf";
 #endif
             std::string cfg_def_file = cfg_file + ".dist";
             
