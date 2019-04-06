@@ -62,5 +62,5 @@ RandomEnchants.Chance3 = 60
 #     RandomEnchants.MinimumQuality
 #        Only enchant items of a certain quality.
 #        Default:     High: 5, Low: 0
-RandomEnchants.HighQuality = 4
-RandomEnchants.LowQuality = 3
+RandomEnchants.HighQuality = 5
+RandomEnchants.LowQuality = 0
