@@ -55,9 +55,9 @@ This code and content is released under the[GNU AGPL v3](https ://github.com/aze
 
 bool RandomEnchantEnabled = true;
 bool RandomEnchantAnnounce = true;
-bool Crafted = 0;
-bool Looted = 0;
-bool QuestReward = 0;
+bool Crafted = 1;
+bool Looted = 1;
+bool QuestReward = 1;
 uint32 HighQuality = 5;
 uint32 LowQuality = 1;
 uint32 Chance1 = 70;
@@ -103,7 +103,7 @@ public:
 
 		// Sanitize
 		if (HighQuality > 5) { HighQuality = 5; }
-		if (LowQuality < 0) { LowQuality = 0; }
+		
 	}
 };
 
@@ -112,15 +112,10 @@ public:
 
 	RandomEnchantsPlayer() : PlayerScript("RandomEnchantsPlayer") { }
 
-	// StygianTheBest - v2017.07.29
-	void OnLogin(Player* player)
+	void OnLogin(Player* player)  override
 	{
-		if (RandomEnchantEnabled)
-		{
-			if (RandomEnchantAnnounce)
-			{
-				ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00RandomEnchants |rmodule.");
-			}
+		if (sConfigMgr->GetBoolDefault("RandomEnchants.Announce", true)) {
+			ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00RandomEnchants |rmodule.");
 		}
 	}
 
