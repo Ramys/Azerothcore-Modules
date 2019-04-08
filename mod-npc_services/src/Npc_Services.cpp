@@ -1,4 +1,4 @@
-#include "ScriptMgr.h"
+#include "ScriptPCH.h"
 #include "ScriptedGossip.h"
 
 class Npc_Services : public CreatureScript

@@ -63,7 +63,7 @@ This code and content is released under the [GNU AGPL v3](https://github.com/aze
 */
 
 #include "Config.h"
-#include "ScriptMgr.h"
+#include "ScriptPCH.h"
 
 bool BFAnnounceModule;
 bool BuffByLevel;
@@ -119,12 +119,14 @@ public:
 
     BufferAnnounce() : PlayerScript("BufferAnnounce") {}
 
-	void OnLogin(Player *Player)
-	{
-		if (sConfigMgr->GetBoolDefault("Buff.Announce", true)) {
-			ChatHandler(Player->GetSession()).SendSysMessage("This server is running the |cff4CFF00BufferNPC |rmodule.");
-		}
-	}
+    void OnLogin(Player* player)
+    {
+        // Announce Module
+        if (BFAnnounceModule)
+        {
+            ChatHandler(player->GetSession()).SendSysMessage("");
+        }
+    }
 };
 
 class buff_npc : public CreatureScript
@@ -196,11 +198,13 @@ public:
         }
 
         // Cure Resurrection Sickness
-		if (player->HasAura(15007))
-			player->RemoveAura(15007);
-		player->GetSession()->SendNotification("|cffFFFFFFRez Sickness succesfully removed!");
-		player->CastSpell(player, 31726);
-		
+        if (BuffCureRes && player->HasAura(15007))
+        {
+            player->RemoveAura(15007, true);
+            std::ostringstream res;
+            res << "The aura of death has been lifted from you " << PlayerName << ". Watch yourself out there!";
+            creature->MonsterWhisper(res.str().c_str(), player);
+        }
 
         // Are we buffing based on level
         if (BuffByLevel == true)
@@ -250,7 +254,7 @@ public:
             } // 40-49
             else if (PlayerLevel >= 50 && PlayerLevel < 60)
             {
-                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(43939)
+                player->CastSpell(player, 39231, true); //Prayer of Fortitude(43939)
                 player->CastSpell(player, vecBuffs[2], true); //Greater Blessing of Kings(43223)
                 player->CastSpell(player, vecBuffs[3], true); //Mark of the Wild(48469)
                 player->CastSpell(player, vecBuffs[4], true); //Prayer of Spirit(48074)
@@ -260,7 +264,7 @@ public:
             } // 50-59
             else if (PlayerLevel >= 60 && PlayerLevel < 70)
             {
-                player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(43939)
+                player->CastSpell(player, 39231, true); //Prayer of Fortitude(43939)
                 player->CastSpell(player, vecBuffs[2], true); //Greater Blessing of Kings(43223)
                 player->CastSpell(player, vecBuffs[3], true); //Mark of the Wild(48469)
                 player->CastSpell(player, vecBuffs[4], true); //Prayer of Spirit(48074)

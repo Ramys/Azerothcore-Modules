@@ -43,7 +43,7 @@ NPCs is done purely in the database and will chain to one another automatically 
 */
 
 #include "Config.h"
-#include "ScriptMgr.h"
+#include "ScriptPCH.h"
 #include "ScriptedGossip.h"
 
 // Locals
