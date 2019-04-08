@@ -77,9 +77,8 @@ player.
 - This code and content is released under the [GNU AGPL v3](https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-AGPL3).
 
 */
-#include "Configuration/Config.h"
-#include "ScriptMgr.h"
-
+#include "Config.h"
+bool CBAnnounceModule;
 
 class CodeboxConfig : public WorldScript
 {
@@ -97,7 +96,7 @@ public:
 			std::string cfg_def_file = cfg_file + ".dist";
 			sConfigMgr->LoadMore(cfg_def_file.c_str());
 			sConfigMgr->LoadMore(cfg_file.c_str());
-								
+			CBAnnounceModule = sConfigMgr->GetBoolDefault("CodeboxNPC.Announce", 1);
 		}
 	}
 };

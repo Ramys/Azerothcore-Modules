@@ -68,9 +68,47 @@ gold. Beware.. He doesn't like cheapskates!
 
 */
 
-#include "Config.h"
+#include "ScriptMgr.h"
+#include "Player.h"
+#include "Configuration/Config.h"
 
+bool GAnnounceModule = 1;
 
+class GamblerConfig : public WorldScript
+{
+public:
+    GamblerConfig() : WorldScript("GamblerConfig") { }
+
+    void OnBeforeConfigLoad(bool reload) override
+    {
+        if (!reload) {
+            std::string conf_path = _CONF_DIR;
+            std::string cfg_file = conf_path + "/npc_gambler.conf";
+#ifdef WIN32
+            cfg_file = "npc_gambler.conf";
+#endif
+            std::string cfg_def_file = cfg_file + ".dist";
+            sConfigMgr->LoadMore(cfg_def_file.c_str());
+            sConfigMgr->LoadMore(cfg_file.c_str());
+            GAnnounceModule = sConfigMgr->GetBoolDefault("GamblerNPC.Announce", 1);
+        }
+    }
+};
+
+class GamblerAnnounce : public PlayerScript
+{
+
+public:
+
+    GamblerAnnounce() : PlayerScript("GamblerAnnounce") {}
+
+    void OnLogin(Player* player)  override
+    {
+        if (sConfigMgr->GetBoolDefault("GamblerNPC.Announce", true)) {
+            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00GamblerNPC |rmodule.");
+        }
+    }
+};
 
 class gamble_npc : public CreatureScript
 {
@@ -351,6 +389,7 @@ public:
 
 void AddNPCGamblerScripts()
 {
-
+    new GamblerConfig();
+    new GamblerAnnounce();
     new gamble_npc();
 }
