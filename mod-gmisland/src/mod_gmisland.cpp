@@ -129,15 +129,12 @@ public:
 
     GMIslandAnnounce() : PlayerScript("GMIslandAnnounce") {}
 
-    void OnLogin(Player* player)
+    void OnLogin(Player *Player)
     {
-        // Announce Module
-        if (GMIAnnounce)
-        {
-            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00GMIsland |rmodule.");
+        if (sConfigMgr->GetBoolDefault("GMI.Announce", true)) {
+            ChatHandler(Player->GetSession()).SendSysMessage("This server is running the |cff4CFF00GMIsland |rmodule.");
         }
     }
-
 };
 
 class GMIsland_Theme_Generator : public CreatureScript

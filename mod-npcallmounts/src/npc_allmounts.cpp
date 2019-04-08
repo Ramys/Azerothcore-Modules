@@ -86,14 +86,12 @@ public:
 
     AllMountsAnnounce() : PlayerScript("AllMountsAnnounce") {}
 
-    void OnLogin(Player* player)
-    {
-        // Announce Module
-        if (AllMountsAnnounceModule)
-        {
-            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00AllMountsNPC |rmodule.");
-        }
-    }
+	void OnLogin(Player *Player)
+	{
+		if (sConfigMgr->GetBoolDefault("AllMountsNPC.Announce", true)) {
+			ChatHandler(Player->GetSession()).SendSysMessage("This server is running the |cff4CFF00AllMountsNPC |rmodule.");
+		}
+	}
 };
 
 class All_Mounts_NPC : public CreatureScript
@@ -125,7 +123,7 @@ public:
         return true;
     }
 
-    bool OnGossipSelect(Player * player, Creature * creature, uint32 sender, uint32 uiAction)
+    bool OnGossipSelect(Player * player, Creature * creature, uint32 sender, uint32 uiAction) override
     {
         player->PlayerTalkClass->ClearMenus();
 

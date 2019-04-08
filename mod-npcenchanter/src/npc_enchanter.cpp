@@ -224,12 +224,10 @@ public:
 
     EnchanterAnnounce() : PlayerScript("EnchanterAnnounce") {}
 
-    void OnLogin(Player* player)
+	void OnLogin(Player *Player)
     {
-        // Announce Module
-        if (EnchanterAnnounceModule)
-        {
-            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00EnchanterNPC |rmodule.");
+        if (sConfigMgr->GetBoolDefault("EnchanterNPC.Announce", true)) {
+            ChatHandler(Player->GetSession()).SendSysMessage("This server is running the |cff4CFF00EnchanterNPC |rmodule.");
         }
     }
 };
