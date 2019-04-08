@@ -77,13 +77,16 @@ player.
 - This code and content is released under the [GNU AGPL v3](https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-AGPL3).
 
 */
-#include "Config.h"
-bool CBAnnounceModule;
+#include "ScriptMgr.h"
+#include "Player.h"
+#include "Configuration/Config.h"
+
+bool CBAnnounceModule = 1;
 
 class CodeboxConfig : public WorldScript
 {
 public:
-	CodeboxConfig() : WorldScript("CodeboxConfig_conf") { }
+	CodeboxConfig() : WorldScript("CodeboxConfig") { }
 
 	void OnBeforeConfigLoad(bool reload) override
 	{
@@ -284,6 +287,7 @@ public:
 
 void AddNPCCodeboxScripts()
 {
+	new CodeboxConfig();
     new CodeboxAnnounce();
     new codebox_npc();
 }

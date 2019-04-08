@@ -11,7 +11,7 @@
 #        Enable/Disable Autobalance system
 #        Default:     1 (1 = ON, 0 = OFF)
 
-VASAutoBalanceAnnounce.enable=1
+VASAutoBalanceAnnounce.enable=0
 
 #
 # VAS AUTOBALANCE OPTIONS

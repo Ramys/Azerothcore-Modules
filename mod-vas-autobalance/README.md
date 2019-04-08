@@ -7,6 +7,4 @@ https://github.com/azerothcore/azerothcore-wotlk/</b>
 * Original Script Name: VAS.AutoBalance
 * Description: This script is intended to scale based on number of players, instance mobs & world bosses' health, mana, and damage.
 * Ported to AzerothCore as a module
-* For installation instructions follow same as https://github.com/azerothcore/mod-vas-autobalance
-
-Updated with working announcer not on main AzerothCore repo
+* For installation instructions follow same as https://github.com/azerothcore/mod-duelreset

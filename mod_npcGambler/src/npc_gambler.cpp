@@ -118,12 +118,12 @@ public:
     gamble_npc() : CreatureScript("gamble_npc") { }
 
     // Get bet amounts from config
-    const uint32 Bet1 = sConfigMgr->GetIntDefault("Gambler.Amount1", 5);
-    const uint32 Bet2 = sConfigMgr->GetIntDefault("Gambler.Amount2", 25);
-    const uint32 Bet3 = sConfigMgr->GetIntDefault("Gambler.Amount3", 50);
-    const uint32 Bet4 = sConfigMgr->GetIntDefault("Gambler.Amount4", 100);
-    const uint32 Bet5 = sConfigMgr->GetIntDefault("Gambler.Amount5", 150);
-    const uint32 Jackpot = sConfigMgr->GetIntDefault("Gambler.Jackpot", 500);
+    const uint32 Bet1 = sConfigMgr->GetIntDefault("Gambler.Amount1", 1);
+    const uint32 Bet2 = sConfigMgr->GetIntDefault("Gambler.Amount2", 2);
+    const uint32 Bet3 = sConfigMgr->GetIntDefault("Gambler.Amount3", 3);
+    const uint32 Bet4 = sConfigMgr->GetIntDefault("Gambler.Amount4", 4);
+    const uint32 Bet5 = sConfigMgr->GetIntDefault("Gambler.Amount5", 5);
+    const uint32 Jackpot = sConfigMgr->GetIntDefault("Gambler.Jackpot", 50);
 
     // How much $$$ the player has
     uint32 Pocket = 0;

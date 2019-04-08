@@ -115,14 +115,14 @@ public:
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, GOSSIP_TEXT_TRAIN, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
 
         if (sConfigMgr->GetBoolDefault("PlayerInteraction", true))
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Premium Services", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Player Services", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
 
         return false; // Cast the spell on use normally
     }
 
-    void OnGossipSelect(Player* player, Item* item, uint32 /*sender*/, uint32 action)
+    void OnGossipSelect(Player* player, Item* item, uint32 /*sender*/, uint32 action) override
     {
         switch (action)
         {
@@ -248,7 +248,7 @@ public:
                 player->PlayerTalkClass->ClearMenus();
 
                 if (sConfigMgr->GetBoolDefault("Vendor", true))
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Premium Services", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Services", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
 
                 if (sConfigMgr->GetBoolDefault("MailBox", true))
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Mail Box", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
@@ -318,7 +318,7 @@ public:
         npc->GetMotionMaster()->MoveFollow(player, PET_FOLLOW_DIST, player->GetFollowAngle());
         npc->setFaction(player->getFaction());
 
-        if (salute && !salute[0] == '\0')
+		if (salute && !(salute[0] == '\0'))
             npc->MonsterWhisper(salute, player, false);
     }
 };
