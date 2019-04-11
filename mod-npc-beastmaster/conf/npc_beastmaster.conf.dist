@@ -6,7 +6,7 @@
 
 # Announce the module when the player logs in?
 
-BeastMaster.Announce = 0
+BeastMaster.Announce = 1
 
 # Enable only for the hunter class?
 # (If this option is set to 0 you can also apply the following patch for better pet handling:
@@ -15,7 +15,7 @@ BeastMaster.Announce = 0
 # patch -lR src/server/game/Entities/Pet/Pet.cpp <modules/mod-npc-beastmaster/Pet.cpp.beastmaster.patch
 # Please take into account that this patch changes the core functionality, so use at your own risk!)
 
-BeastMaster.HunterOnly = 1
+BeastMaster.HunterOnly = 0
 
 # Is the core Pet.cpp modified? (default: 0)
 

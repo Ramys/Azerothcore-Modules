@@ -145,7 +145,7 @@ public:
         else
         {
             // GUID not found - Assign the first Loremaster entry
-            if (NextDestination = WorldDatabase.PQuery("SELECT id, position_x, position_y, position_z, orientation, map, name FROM npc_loremaster WHERE id = '%u'", (FirstLoremaster)))
+            if (NextDestination == WorldDatabase.PQuery("SELECT id, position_x, position_y, position_z, orientation, map, name FROM npc_loremaster WHERE id = '%u'", (FirstLoremaster)))
             {
                 // Get NextDestination fields
                 Field * fields = NextDestination->Fetch();
