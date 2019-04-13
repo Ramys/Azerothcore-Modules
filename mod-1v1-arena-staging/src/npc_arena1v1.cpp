@@ -17,6 +17,7 @@
 #include "ScriptMgr.h"
 #include "npc_arena1v1.h"
 #include "Log.h"
+#include "Player.h"
 
 class arena1v1_worldscript : public WorldScript
 {
@@ -43,7 +44,7 @@ public:
 
     void OnLogin(Player* player)  override
     {
-        if (sConfigMgr->GetBoolDefault("Arena.1v1.Announcer", true)) {
+        if (sConfigMgr->GetBoolDefault("Arena.1v1.Announcer", false)) {
             ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00Arena.1v1 |rmodule.");
         }
     }

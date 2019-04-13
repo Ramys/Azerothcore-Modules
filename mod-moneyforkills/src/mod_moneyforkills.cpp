@@ -178,7 +178,7 @@ public:
                     victim->ModifyMoney(-VictimLoot);
 
                     // Inform the player of the corpse loot
-                    Notify(player, victim, NULL, "Loot", NULL, VictimLoot);
+                    Notify(player, victim, NULL, "Loot", 0, VictimLoot);
 
                     // Pay the player the additional PVP bounty
                     player->ModifyMoney(BountyAmount);
@@ -302,7 +302,7 @@ public:
                     player->ModifyMoney(bounty);
 
                     // Inform the player of the bounty amount
-                    Notify(player, NULL, killed, KillType, bounty, NULL);
+                    Notify(player, NULL, killed, KillType, bounty, 0);
                 }
                 else
                 {
@@ -322,7 +322,7 @@ public:
                                 playerInGroup->ModifyMoney(bounty);
 
                                 // Inform the player of the bounty amount
-                                Notify(playerInGroup, NULL, killed, KillType, bounty, NULL);
+                                Notify(playerInGroup, NULL, killed, KillType, bounty, 0);
                             }
                             else
                             {
@@ -333,7 +333,7 @@ public:
                                     playerInGroup->ModifyMoney(bounty);
 
                                     // Inform the player of the bounty amount
-                                    Notify(playerInGroup, NULL, killed, KillType, bounty, NULL);
+                                    Notify(playerInGroup, NULL, killed, KillType, bounty, 0);
                                 }
                             }
                         }
