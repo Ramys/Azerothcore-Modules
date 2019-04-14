@@ -39,7 +39,7 @@ public:
 			sLog->outString( "Anticheat: Resetting daily report states.");
 			sAnticheatMgr->ResetDailyReportStates();
 			UpdateReportResetTime();
-			sLog->outString( "Anticheat: Next daily report reset: %u", resetTime);
+			sLog->outString( "Anticheat: Next daily report reset: %li", resetTime);
 		}
 		if (sWorld->GetUptime() > lastIterationPlayer)
 		{
