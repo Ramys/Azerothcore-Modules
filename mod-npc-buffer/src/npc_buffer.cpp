@@ -57,7 +57,7 @@ Creates a one-click Buff NPC with emotes.
 
 */
 
-#include "Player.h"
+#include "Config.h"
 #include "ScriptMgr.h"
 #include "Configuration/Config.h"
 
