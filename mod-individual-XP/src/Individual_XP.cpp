@@ -133,7 +133,7 @@ public:
 
             return IndividualXPBaseTable;
         }
-    }
+	}
     // View Command
     static bool HandleViewCommand(ChatHandler* handler, char const* args)
     {

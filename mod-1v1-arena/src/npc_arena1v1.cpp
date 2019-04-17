@@ -19,6 +19,7 @@
 #include "Log.h"
 #include "Player.h"
 
+
 class arena1v1_worldscript : public WorldScript
 {
 public:

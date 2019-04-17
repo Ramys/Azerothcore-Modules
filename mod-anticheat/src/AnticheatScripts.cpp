@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "AccountMgr.h"
 
+
 int64 resetTime = 0;
 int64 lastIterationPlayer = sWorld->GetUptime() + 30;//TODO: change 30 secs static to a configurable option
 class AnticheatPlayerScript : public PlayerScript
@@ -39,7 +40,7 @@ public:
 			sLog->outString( "Anticheat: Resetting daily report states.");
 			sAnticheatMgr->ResetDailyReportStates();
 			UpdateReportResetTime();
-			sLog->outString( "Anticheat: Next daily report reset: %ld", resetTime);
+			sLog->outString( "Anticheat: Next daily report reset: %u ", resetTime);
 		}
 		if (sWorld->GetUptime() > lastIterationPlayer)
 		{
