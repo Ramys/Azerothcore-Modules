@@ -1,0 +1,54 @@
+[worldserver]
+
+###################################################################################################
+#	BEASTMASTER NPC
+###################################################################################################
+
+# Announce the module when the player logs in?
+
+BeastMaster.Announce = 1
+
+# Enable only for the hunter class?
+# (If this option is set to 0 you can also apply the following patch for better pet handling:
+# patch -l src/server/game/Entities/Pet/Pet.cpp <modules/mod-npc-beastmaster/Pet.cpp.beastmaster.patch
+# In order to revert the patch use this command:
+# patch -lR src/server/game/Entities/Pet/Pet.cpp <modules/mod-npc-beastmaster/Pet.cpp.beastmaster.patch
+# Please take into account that this patch changes the core functionality, so use at your own risk!)
+
+BeastMaster.HunterOnly = 0
+
+# Is the core Pet.cpp modified? (default: 0)
+
+BeastMaster.CorePatch = 0
+
+# Required level to adopt pets. (default: 10, 0 = disable)
+
+BeastMaster.MinLevel = 10
+
+# Hunters are required to have Beast Mastery to adopt exotic pets. (default: 0)
+
+BeastMaster.HunterBeastMasteryRequired = 0
+
+# Allow exotic pets for non-hunters (default: 1)
+
+BeastMaster.AllowExotic = 1
+
+# Keep pet always happy (default: 0)
+
+BeastMaster.KeepPetHappy = 0
+
+# Normal pets
+
+BeastMaster.Pets="Bat,10357,Bear,12037,Boar,29996,Cat,2175,Carrion Bird,2931,Crab,18241,Crocolisk,1417,Dragonhawk,18155,Gorilla,1559,Hound,29452,Hyena,5829,Moth,25498,Nether Ray,18285,Owl,14343,Raptor,9684,Ravager,22123,Scorpid,14476,Serpent,28011,Spider,12433,Spore Bat,18280,Tallstrider,22807,Turtle,14223,Warp Stalker,23163,Wasp,18283,Wind Serpent,5834,Wolf,3825,Worg,24128"
+
+# Exotic pets
+
+BeastMaster.ExoticPets="Chimaera,20932,Core Hound,33502,Devilsaur,32485,Rhino,25487,Silithid,6582,Jormungar Worm,30422,Arcturis (Spirit Bear),38453,Gondria (Spirit Tiger),33776,Loque'nahak (Spirit Leopard),32517,Skoll (Spirit Worg),35189"
+
+# Rare pets
+
+BeastMaster.RarePets="Mazzranache (Tallstrider),3068,Aotona (Bird),32481"
+
+# Rare Exotic pets
+
+BeastMaster.RareExoticPets="Kurken,17447"
