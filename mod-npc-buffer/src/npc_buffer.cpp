@@ -30,6 +30,7 @@ the player using configurable emote options.
 
 ### Version
 ------------------------------------------------------------------------------------------------------------------
+- v2019.04.17 - Fix Cure Resurrection Sickness, works now! Courtesy of Poszer and Milestorme
 - v2019.04.15 - Ported to AzerothCore by gtao725 (https://github.com/gtao725/)
 - v2019.02.13 - Added phrases/emotes, config options, updated AI
 - v2017.08.06 - Removed dialogue options (Just buffs player on click)
@@ -197,13 +198,13 @@ public:
             vecBuffs.push_back(stoul(buff));
         }
 
-         // Remove Ressurection Sickness?
-        if (sConfigMgr->GetBoolDefault("Buff.CureRes", true))
+        // Cure Resurrection Sickness
+        if (BuffCureRes && player->HasAura(15007))
         {
-            // Cure Resurrection Sickness
-        if (player->HasAura(15007))
             player->RemoveAura(15007);
-            player->CastSpell(player, 31726);
+            std::ostringstream res;
+            res << "The aura of death has been lifted from you " << PlayerName << ". Watch yourself out there!";
+            creature->MonsterWhisper(res.str().c_str(), player);
         }
 
         // Are we buffing based on level
@@ -245,6 +246,7 @@ public:
             } // 30-39
             else if (PlayerLevel >= 40 && PlayerLevel < 50)
             {
+                player->CastSpell(player, 25898, true);  // Greater Blessing of Kings (Rank 1)
                 player->CastSpell(player, 21562, true); // Prayer of Fortitude (Rank 1)
                 player->CastSpell(player, vecBuffs[3], true); //Mark of the Wild(48469)
                 player->CastSpell(player, 27681, true); // Prayer of Spirit (Rank 1)
@@ -255,7 +257,7 @@ public:
             else if (PlayerLevel >= 50 && PlayerLevel < 60)
             {
                 player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(48162)
-                player->CastSpell(player, vecBuffs[2], true); //Greater Blessing of Kings(43223)
+                player->CastSpell(player, 25898, true); //Greater Blessing of Kings(25898)
                 player->CastSpell(player, vecBuffs[3], true); //Mark of the Wild(48469)
                 player->CastSpell(player, vecBuffs[4], true); //Prayer of Spirit(48074)
                 player->CastSpell(player, vecBuffs[5], true); //Prayer of Shadow Protection(48170)
@@ -265,7 +267,7 @@ public:
             else if (PlayerLevel >= 60 && PlayerLevel < 70)
             {
                 player->CastSpell(player, vecBuffs[1], true); //Prayer of Fortitude(48162)
-                player->CastSpell(player, vecBuffs[2], true); //Greater Blessing of Kings(43223)
+                player->CastSpell(player, 25898, true); //Greater Blessing of Kings(25898)
                 player->CastSpell(player, vecBuffs[3], true); //Mark of the Wild(48469)
                 player->CastSpell(player, vecBuffs[4], true); //Prayer of Spirit(48074)
                 player->CastSpell(player, vecBuffs[5], true); //Prayer of Shadow Protection(48170)
@@ -297,9 +299,7 @@ public:
         {
             // No level requirement, so buff with max level default buffs
             for (std::vector<uint32>::const_iterator itr = vecBuffs.begin(); itr != vecBuffs.end(); itr++)
-            {
-                player->CastSpell(player, *itr, true);
-            }
+            player->CastSpell(player, *itr, true);
         }
 
         // Choose and speak a random phrase to the player

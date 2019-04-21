@@ -1,0 +1,15 @@
+[worldserver]
+
+#
+#	KeepOutEnabled
+#		Enable/Disable this Module
+#		Default:	Enabled = 1
+#					Disable = 0
+KeepOutEnabled = 1
+
+#
+#    MaxWarnings
+#        Description: MaxWarnings before the player gets kicked from the server
+#        Default:     Enabled  = 3
+#                     
+MaxWarnings = 3
