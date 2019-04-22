@@ -35,7 +35,7 @@ public:
         }
 
         player->PlayerTalkClass->ClearMenus();
-        player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_TALK, "Spawn Innkeeper", GOSSIP_SENDER_MAIN, 18649, "Add a Innkeeper?", GuildHouseInnKeeper, false);
+        player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_TALK, "Spawn Innkeeper", GOSSIP_SENDER_MAIN, 78649, "Add a Innkeeper?", GuildHouseInnKeeper, false);
         player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_TALK, "Spawn Mailbox", GOSSIP_SENDER_MAIN, 184137, "Spawn a mailbox?", GuildHouseMailBox, false);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Spawn Class Trainer", GOSSIP_SENDER_MAIN, 2);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Spawn Vendor", GOSSIP_SENDER_MAIN, 3);
@@ -140,7 +140,7 @@ public:
             cost = GuildHouseBank;
             SpawnNPC(action, player);
             break;
-        case 18649: // Innkeeper
+        case 78649: // Innkeeper
             cost = GuildHouseInnKeeper;
             SpawnNPC(action, player);
             break;

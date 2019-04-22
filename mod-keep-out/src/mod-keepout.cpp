@@ -28,7 +28,7 @@ public:
 
     void OnLogin(Player* player)
     {
-        ChatHandler(player->GetSession()).PSendSysMessage("This server is running the |cff4CFF00Keepout |rmodule.");
+        ChatHandler(player->GetSession()).PSendSysMessage("");
     }
 
     void OnMapChanged(Player* player)
