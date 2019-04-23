@@ -31,39 +31,36 @@ public:
             std::string conf_path = _CONF_DIR;
             std::string cfg_file = conf_path + "/1v1arena.conf";
             std::string cfg_def_file = cfg_file + ".dist";
+            sConfigMgr->LoadMore(cfg_def_file.c_str());
             sConfigMgr->LoadMore(cfg_file.c_str());
+			
         }
     }
 };
 
-class Arena1v1Announce : public PlayerScript
-{
-
-public:
-
-    Arena1v1Announce() : PlayerScript("Arena1v1Announce") {}
-
-    void OnLogin(Player* player)  override
-    {
-        if (sConfigMgr->GetBoolDefault("Arena.1v1.Announcer", false)) {
-            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00Arena.1v1 |rmodule.");
-        }
-    }
-};
 
 class npc_1v1arena : public CreatureScript
 {
 public:
-    npc_1v1arena() : CreatureScript("npc_1v1arena")
+    npc_1v1arena() : CreatureScript("npc_1v1arena") {}
+	
+	void OnLogin(Player* pPlayer) 
     {
+        if (sConfigMgr->GetBoolDefault("Arena1v1Announcer.Enable", true))
+        {
+            ChatHandler(pPlayer->GetSession()).SendSysMessage("This server is running the |cff4CFF00Arena 1v1 |rmodule.");
+        }
     }
-
+	
+	
+    
     bool JoinQueueArena(Player* player, Creature* me, bool isRated)
     {
+
         if (!player || !me)
             return false;
 
-        if (sConfigMgr->GetIntDefault("CONFIG_ARENA_1V1_MIN_LEVEL", 70) > player->getLevel())
+        if (sConfigMgr->GetIntDefault("Arena1v1MinLevel", 80) > player->getLevel())
             return false;
 
         uint64 guid = player->GetGUID();
@@ -143,7 +140,7 @@ public:
 
         return true;
     }
-
+   
 
     bool CreateArenateam(Player* player, Creature* me)
     {
@@ -202,24 +199,24 @@ public:
         if (!player || !me)
             return true;
 
-        if (sConfigMgr->GetBoolDefault("CONFIG_ARENA_1V1_ENABLE", true) == false)
+        if (sConfigMgr->GetBoolDefault("Arena1v1.Enable", true) == false)
         {
             ChatHandler(player->GetSession()).SendSysMessage("1v1 disabled!");
             return true;
         }
 
         if (player->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_5v5))
-            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Queueleave 1v1 Arena", GOSSIP_SENDER_MAIN, 3, "Are you sure?", 0, false);
+            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Queue leave 1v1 Arena", GOSSIP_SENDER_MAIN, 3, "Are you sure?", 0, false);
         else
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Queue enter 1v1 Arena(Unchecked)", GOSSIP_SENDER_MAIN, 20);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Queue enter 1v1 Arena(UnRated)", GOSSIP_SENDER_MAIN, 20);
 
         if (player->GetArenaTeamId(ArenaTeam::GetSlotByType(ARENA_TEAM_5v5)) == 0)
-            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Create new 1v1 Arena Team", GOSSIP_SENDER_MAIN, 1, "Are you sure?", sConfigMgr->GetIntDefault("CONFIG_ARENA_1V1_COSTS", 400000), false);
+            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Create new 1v1 Arena Team", GOSSIP_SENDER_MAIN, 1, "Are you sure?", sConfigMgr->GetIntDefault("Arena1v1Costs", 400000), false);
         else
         {
             if (player->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_5v5) == false)
             {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Queue enter 1v1 Arena (scored)", GOSSIP_SENDER_MAIN, 2);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Queue enter 1v1 Arena (Rated)", GOSSIP_SENDER_MAIN, 2);
                 player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Arenateam Clear", GOSSIP_SENDER_MAIN, 5, "Are you sure?", 0, false);
             }
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Shows your statistics", GOSSIP_SENDER_MAIN, 4);
@@ -243,14 +240,14 @@ public:
         {
         case 1: // Create new Arenateam
         {
-            if (sConfigMgr->GetIntDefault("CONFIG_ARENA_1V1_MIN_LEVEL", 70) <= player->getLevel())
+            if (sConfigMgr->GetIntDefault("Arena1v1MinLevel", 80) <= player->getLevel())
             {
-                if (player->GetMoney() >= uint32(sConfigMgr->GetIntDefault("CONFIG_ARENA_1V1_COSTS", 400000)) && CreateArenateam(player, me))
-                    player->ModifyMoney(sConfigMgr->GetIntDefault("CONFIG_ARENA_1V1_COSTS", 400000) * -1);
+                if (player->GetMoney() >= uint32(sConfigMgr->GetIntDefault("Arena1v1Costs", 400000)) && CreateArenateam(player, me))
+                    player->ModifyMoney(sConfigMgr->GetIntDefault("Arena1v1Costs", 400000) * -1);
             }
             else
             {
-                ChatHandler(player->GetSession()).PSendSysMessage("You have to be level %u + to create a 1v1 arena team.", sConfigMgr->GetIntDefault("CONFIG_ARENA_1V1_MIN_LEVEL", 70));
+                ChatHandler(player->GetSession()).PSendSysMessage("You have to be level %u + to create a 1v1 arena team.", sConfigMgr->GetIntDefault("Arena1v1MinLevel", 70));
                 player->CLOSE_GOSSIP_MENU();
                 return true;
             }
@@ -339,5 +336,4 @@ void AddSC_npc_1v1arena()
 {
     new arena1v1_worldscript();
     new npc_1v1arena();
-    new Arena1v1Announce();
 }
