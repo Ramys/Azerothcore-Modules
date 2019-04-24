@@ -38,21 +38,24 @@ public:
     }
 };
 
-
-class npc_1v1arena : public CreatureScript
-{
+class arena1v1announce : public PlayerScript{
 public:
-    npc_1v1arena() : CreatureScript("npc_1v1arena") {}
-	
-	void OnLogin(Player* pPlayer) 
+
+    arena1v1announce() : PlayerScript("arena1v1announce") { }
+
+void OnLogin(Player* pPlayer) override
     {
         if (sConfigMgr->GetBoolDefault("Arena1v1Announcer.Enable", true))
         {
             ChatHandler(pPlayer->GetSession()).SendSysMessage("This server is running the |cff4CFF00Arena 1v1 |rmodule.");
         }
     }
-	
-	
+};
+
+class npc_1v1arena : public CreatureScript
+{
+public:
+    npc_1v1arena() : CreatureScript("npc_1v1arena") { }
     
     bool JoinQueueArena(Player* player, Creature* me, bool isRated)
     {
@@ -154,7 +157,7 @@ public:
         // Check if player is already in an arena team
         if (player->GetArenaTeamId(slot))
         {
-            player->GetSession()->SendArenaTeamCommandResult(ERR_ARENA_TEAM_CREATE_S, player->GetName(), "", ERR_ALREADY_IN_ARENA_TEAM);
+            player->GetSession()->SendArenaTeamCommandResult(ERR_ARENA_TEAM_CREATE_S, player->GetName(), "You are already in an arena team!", ERR_ALREADY_IN_ARENA_TEAM);
             return false;
         }
 
@@ -334,6 +337,7 @@ public:
 
 void AddSC_npc_1v1arena()
 {
+    new arena1v1announce();
     new arena1v1_worldscript();
     new npc_1v1arena();
 }

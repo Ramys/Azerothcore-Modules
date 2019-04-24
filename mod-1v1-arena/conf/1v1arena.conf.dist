@@ -8,7 +8,7 @@
 #         Default:     0 - (Disabled)
 #                      1 - (Enabled)
 
-Arena1v1Enable = 1
+Arena1v1.Enable = 1
 
 #    NOT IMPLEMENTED
 #    Arena.1v1.Announcer
@@ -17,7 +17,7 @@ Arena1v1Enable = 1
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Arena1v1Announcer = 1
+Arena1v1Announcer.Enable = 1
 
 #
 #    Arena.1v1.MinLevel
