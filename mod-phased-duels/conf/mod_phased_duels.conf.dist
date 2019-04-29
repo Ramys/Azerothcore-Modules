@@ -8,9 +8,9 @@
 
 PhasedDuels.Enable = 1
 
-#Announce Module (1: true | 0: false)
+# Announce Module (1: true | 0: false)
 
-PhasedDuelsAnnounce.Enable = 0
+PhasedDuelsAnnounce.Enable = 1
 
 ###################################################################################################
 #
