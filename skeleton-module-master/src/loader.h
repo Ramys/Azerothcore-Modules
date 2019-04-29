@@ -1,1 +1,0 @@
-void AddDynamic_ResurrectionScripts();
