@@ -1,0 +1,51 @@
+From 0106415e3f04c0cff0e34710cc0100cf79ea2061 Mon Sep 17 00:00:00 2001
+From: Poszer <41213210+poszer@users.noreply.github.com>
+Date: Mon, 29 Apr 2019 16:33:17 +0200
+Subject: [PATCH] Patch for Dynamic Resurrection
+
+---
+ src/server/game/Entities/Player/Player.cpp | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
+
+diff --git a/src/server/game/Entities/Player/Player.cpp b/src/server/game/Entities/Player/Player.cpp
+index 19c01752..cc954b12 100644
+--- a/src/server/game/Entities/Player/Player.cpp
++++ b/src/server/game/Entities/Player/Player.cpp
+@@ -77,6 +77,7 @@
+ #include "TicketMgr.h"
+ #include "ScriptMgr.h"
+ #include "GameGraveyard.h"
++#include "../../../modules/mod-dynamicresurrection/src/DynamicResurrection.h"
+ 
+ #ifdef ELUNA
+ #include "LuaEngine.h"
+@@ -5630,15 +5631,20 @@ void Player::RepopAtGraveyard()
+     // and don't show spirit healer location
+     if (ClosestGrave)
+     {
+-        TeleportTo(ClosestGrave->Map, ClosestGrave->x, ClosestGrave->y, ClosestGrave->z, GetOrientation());
+-        if (isDead())                                        // not send if alive, because it used in TeleportTo()
++        if (sDynRes->IsInDungeonOrRaid(this) && sDynRes->CheckForSpawnPoint(this))
++            sDynRes->DynamicResurrection(this);
++        else
+         {
+-            WorldPacket data(SMSG_DEATH_RELEASE_LOC, 4*4);  // show spirit healer position on minimap
+-            data << ClosestGrave->Map;
+-            data << ClosestGrave->x;
+-            data << ClosestGrave->y;
+-            data << ClosestGrave->z;
+-            GetSession()->SendPacket(&data);
++            TeleportTo(ClosestGrave->Map, ClosestGrave->x, ClosestGrave->y, ClosestGrave->z, GetOrientation());
++            if (isDead())                                        // not send if alive, because it used in TeleportTo()
++            {
++                WorldPacket data(SMSG_DEATH_RELEASE_LOC, 4 * 4);  // show spirit healer position on minimap
++                data << ClosestGrave->Map;
++                data << ClosestGrave->x;
++                data << ClosestGrave->y;
++                data << ClosestGrave->z;
++                GetSession()->SendPacket(&data);
++            }
+         }
+     }
+     else if (GetPositionZ() < GetMap()->GetMinHeight(GetPositionX(), GetPositionY()))
+-- 

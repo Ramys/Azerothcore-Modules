@@ -300,7 +300,7 @@ public:
                 s << "\nWeek Games: " << at->GetStats().WeekGames;
                 s << "\nWeek Wins: " << at->GetStats().WeekWins;
 
-                ChatHandler(player->GetSession()).PSendSysMessage(s.str().c_str());
+                ChatHandler(player->GetSession()).PSendSysMessage(SERVER_MSG_STRING, s.str().c_str());
             }
         }
         break;

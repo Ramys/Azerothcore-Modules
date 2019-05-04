@@ -62,7 +62,8 @@ config file for quick modifications.
 
 */
 
-#include "Config.h"
+#include "Configuration/Config.h"
+#include "ScriptMgr.h"
 #include "Player.h"
 
 bool CongratsEnable = true;
@@ -78,9 +79,7 @@ public:
         if (!reload) {
             std::string conf_path = _CONF_DIR;
             std::string cfg_file = conf_path + "/mod_congratsonlevel.conf";
-#ifdef WIN32
-            cfg_file = "mod_congratsonlevel.conf";
-#endif
+
             std::string cfg_def_file = cfg_file + ".dist";
             sConfigMgr->LoadMore(cfg_def_file.c_str());
             sConfigMgr->LoadMore(cfg_file.c_str());
@@ -265,14 +264,6 @@ public:
                 break;
             }
 
-            default:
-            {
-                // Issue a server notification for the player on level up.
-                std::ostringstream ss;
-                ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << to_string(player->getLevel()) << "|cffFFFFFF!";
-                sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
-                break;
-            }
 
             return;
             }
@@ -280,11 +271,7 @@ public:
             // If level is defined, they hit a reward level.
             if (!level.empty())
             {
-                // Issue a server notification for the player on level up.
-                std::ostringstream ss;
-                ss << "|cffFFFFFF[ |cffFF0000C|cffFFA500O|cffFFFF00N|cff00FF00G|cff00FFFFR|cff6A5ACDA|cffFF00FFT|cff98FB98S|cffFF0000! |cffFFFFFF] : |cff4CFF00 " << player->GetName() << " |cffFFFFFFhas reached |cff4CFF00Level " << level << "|cffFFFFFF!";
-                sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
-
+                
                 // Give the items to the player
                 player->AddItem(item1, 1);				// Defined Item 1
                 player->AddItem(item2, 1);				// Defined Item 2
@@ -298,7 +285,7 @@ public:
                 // Issue a raid warning to the player
                 std::ostringstream ss2;
                 ss2 << "Congrats on Level " << level << " " << player->GetName() << "! You've been awarded " << money << " gold and a few treasures!";
-                player->GetSession()->SendNotification(ss2.str().c_str());
+                player->GetSession()->SendNotification(SERVER_MSG_STRING, ss2.str().c_str());
 
                 return;
             }

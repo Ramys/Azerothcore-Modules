@@ -244,11 +244,11 @@ public:
 		int tier = 0;
 		if (rarityRoll <= 50)
 			tier = 1;
-		else if (rarityRoll <= 50)
+		else if (rarityRoll <= 51)
 			tier = 2;
-		else if (rarityRoll <= 50)
+		else if (rarityRoll <= 52)
 			tier = 3;
-		else if (rarityRoll <= 50)
+		else if (rarityRoll <= 53)
 			tier = 4;
 		else
 			tier = 5;

@@ -55,7 +55,7 @@ The icon will only show in the player's backpack if their client has the Patch-Z
 #include "GossipDef.h"
 
 uint32 Increase_Level;
-uint32 MaxItemLevel = 80;
+uint32 MaxItemLevel = 60;
 bool LevelItemEnable = true;
 bool LevelItemAnnounce = true;
 
@@ -71,17 +71,9 @@ public:
         if (!reload) {
             std::string conf_path = _CONF_DIR;
             std::string cfg_file = conf_path + "/mod_levelitem.conf";
-
-#ifdef WIN32
-            cfg_file = "mod_levelitem.conf";
-#endif
-
             std::string cfg_def_file = cfg_file + ".dist";
             sConfigMgr->LoadMore(cfg_def_file.c_str());
             sConfigMgr->LoadMore(cfg_file.c_str());
-
-            // Load Configuration Settings
-            SetInitialWorldSettings();
         }
     }
 
@@ -90,7 +82,7 @@ public:
     {
         LevelItemEnable = sConfigMgr->GetBoolDefault("LevelItem.Enable", true);
         LevelItemAnnounce = sConfigMgr->GetBoolDefault("LevelItem.Announce", true);
-        MaxItemLevel = sConfigMgr->GetIntDefault("LevelItem.MaxItemLevel", 80);
+        MaxItemLevel = sConfigMgr->GetIntDefault("LevelItem.MaxItemLevel", 60);
     }
 };
 
@@ -101,15 +93,11 @@ class mod_levelitem_Announce : public PlayerScript
 public:
     mod_levelitem_Announce() : PlayerScript("mod_levelitem_Announce") {}
 
-    void OnLogin(Player* player)
+    void OnLogin(Player* player) override
     {
-        if (LevelItemEnable)
+        if (sConfigMgr->GetBoolDefault("Arena1v1Announcer.Enable", true))
         {
-            // Announce Module
-            if (LevelItemAnnounce)
-            {
-                ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00LevelItem |rmodule");
-            }
+            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00Level Item |rmodule.");
         }
     }
 };
@@ -130,7 +118,7 @@ public:
             return false;
         }
 
-        if (p->getLevel() == MaxItemLevel)
+        if (p->getLevel() >= MaxItemLevel)
         {
             ChatHandler(p->GetSession()).PSendSysMessage("You're already at MAX level!");
             return false;
