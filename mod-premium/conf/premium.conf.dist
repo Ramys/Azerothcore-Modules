@@ -56,6 +56,8 @@ Vendor = 1
 #                     0  - (Disabled)
 MailBox = 1
 
+Services = 1
+
 ##################################################################################################################
 #   Premium.NpcDuration
 #       Description: Time (in seconds) before despawn of summoned NPC

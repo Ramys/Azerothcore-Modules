@@ -203,7 +203,7 @@ public:
                     Field * tn_fields = tn_query->Fetch();
 
                     std::ostringstream message;
-                    message << "|cffFFFFFF[|cffDA70D6 GM Island |cffFFFFFF]:|cff4CFF00 " << player->GetName() << "|cffFFFFFF changed the theme to |cffDA70D6" << tn_fields[0].GetString() << "|r.";
+                    message << "|cffFFFFFF[|cffDA70D6 Guild House |cffFFFFFF]:|cff4CFF00 " << player->GetName() << "|cffFFFFFF changed the theme to |cffDA70D6" << tn_fields[0].GetString() << "|r.";
                     SendAnnounceToGMs(message.str().c_str(), NULL);
                 }
             }

@@ -227,28 +227,28 @@ public:
 			rarityRoll = rand_norm() * 50;
 			break;
 		case 2://green
-			rarityRoll = rand_norm() * 50;
+			rarityRoll = 45 + (rand_norm() * 24);
 			break;
 		case 3://blue
-			rarityRoll = rand_norm() * 50;
+			rarityRoll = 52 + (rand_norm() * 23);
 			break;
 		case 4://purple
-			rarityRoll = rand_norm() * 50;
+			rarityRoll = 56 + (rand_norm() * 22);
 			break;
 		case 5://orange
-			rarityRoll = rand_norm() * 50;
+			rarityRoll = 61;
 			break;
 		}
 		if (rarityRoll < 0)
 			return -1;
 		int tier = 0;
-		if (rarityRoll <= 50)
+		if (rarityRoll <= 44)
 			tier = 1;
 		else if (rarityRoll <= 51)
 			tier = 2;
-		else if (rarityRoll <= 52)
+		else if (rarityRoll <= 55)
 			tier = 3;
-		else if (rarityRoll <= 53)
+		else if (rarityRoll <= 60)
 			tier = 4;
 		else
 			tier = 5;

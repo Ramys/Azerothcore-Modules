@@ -11,6 +11,8 @@ enum Vendors
 {
     NPC_VENDOR_A    = 55002,
     NPC_VENDOR_H    = 55002,
+    NPC_VENDOR_AA    = 54,
+    NPC_VENDOR_HH    = 3163,
     NPC_AUCTION_H   = 9856,
     NPC_AUCTION_A   = 8670
 };
@@ -79,6 +81,8 @@ public:
             player->FindNearestCreature(NPC_AUCTION_H, rangeCheck) ||
             player->FindNearestCreature(NPC_VENDOR_A, rangeCheck) ||
             player->FindNearestCreature(NPC_VENDOR_H, rangeCheck) ||
+            player->FindNearestCreature(NPC_VENDOR_AA, rangeCheck) ||
+            player->FindNearestCreature(NPC_VENDOR_HH, rangeCheck) ||
             player->FindNearestCreature(ROGUE_A, rangeCheck) ||
             player->FindNearestCreature(WARRIOR_A, rangeCheck) ||
             player->FindNearestCreature(HUNTER_A, rangeCheck) ||
@@ -115,7 +119,10 @@ public:
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, GOSSIP_TEXT_TRAIN, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 8);
 
         if (sConfigMgr->GetBoolDefault("PlayerInteraction", true))
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Player Services", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Premium Services", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
+
+        if (sConfigMgr->GetBoolDefault("Vendor", true))
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Vendor", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 10);
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
 
@@ -148,7 +155,7 @@ public:
                 player->GetSession()->SendShowMailBox(player->GetGUID());
                 break;
             }
-            case GOSSIP_ACTION_INFO_DEF + 5: /*Vendor*/
+            case GOSSIP_ACTION_INFO_DEF + 5: /*poszer*/
             {
                 uint32 vendorId = 0;
                 std::string salute;
@@ -247,8 +254,8 @@ public:
             {
                 player->PlayerTalkClass->ClearMenus();
 
-                if (sConfigMgr->GetBoolDefault("Vendor", true))
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Services", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
+                if (sConfigMgr->GetBoolDefault("Services", true))
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Poszer", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 5);
 
                 if (sConfigMgr->GetBoolDefault("MailBox", true))
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Mail Box", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
@@ -260,6 +267,23 @@ public:
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Auction House", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 7);
 
                 player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
+                break;
+            }
+            case GOSSIP_ACTION_INFO_DEF + 10: /*Vendor*/
+            {
+                uint32 vendorId = 0;
+                std::string salute;
+                if (player->GetTeamId() == TEAM_ALLIANCE)
+                {
+                    vendorId = NPC_VENDOR_AA;
+                    salute = "Greetings";
+                } else {
+                    vendorId = NPC_VENDOR_HH;
+                    salute = "Zug zug";
+                }
+
+                SummonTempNPC(player, vendorId, salute.c_str());
+                player->CLOSE_GOSSIP_MENU();
                 break;
             }
         }

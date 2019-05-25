@@ -50,7 +50,7 @@ public:
             do
             {
                 CharacterDatabase.PQuery("INSERT INTO `mapexploit` (`player`, `map`, `area`) VALUES ('%s', '%s', '%u')", playername.c_str(), mapname.c_str(), player->GetAreaId());
-                ChatHandler(player->GetSession()).PSendSysMessage("You have gone to a forbidden place your actions have been logged.");
+                ChatHandler(player->GetSession()).PSendSysMessage("You are not prepared, be gone.");
 
                 uint32& warninggiven = player->CustomData.GetDefault<Playerwarning>("warning")->warning;
 
