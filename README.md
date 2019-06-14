@@ -4,4 +4,4 @@ this is my compilation of working modules, these have the most updated working f
 All announcers working , still some build warnings to cleanup
 
 Credits
-http://azerothcore.com
+http://azerothcore.org
