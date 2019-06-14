@@ -404,7 +404,7 @@ public:
         {
             // If they have bet 10 times this session, decrement their roll 
             // by 1 to prevent a roll of 100 and hitting the jackpot. 
-            Roll = Roll - 1;
+            Roll = Roll -1;
         }
 
         // Calculate player money and bet values
@@ -412,7 +412,7 @@ public:
 
         // Losing Streak? Aww.. how about some help.
         // After 5 losses in a row, add +25 to their next roll.
-        if (Losses >= 5 && Roll < 50)
+        if (Losses >= 10 && Roll < 51)
         {
             std::ostringstream messageHelp;
             messageHelp << "Lady luck isn't on your side tonight " << player->GetName() << ".";
@@ -454,7 +454,7 @@ public:
         }
 
         // Why does it happen? Because it happens.. Roll the bones.. Roll the bones!
-        if (Roll >= 50)
+        if (Roll >= 51)
         {
             std::ostringstream messageAction;
             std::ostringstream messageNotice;

@@ -6,6 +6,9 @@
 #include "ScriptMgr.h"
 #include "Spell.h"
 #include "Configuration/Config.h"
+#include "BattlegroundMgr.h"
+#include "Battleground.h"
+#include "Map.h"
 
 enum Vendors
 {
@@ -73,8 +76,10 @@ public:
         if (!result)
             return false;
 
-        if (player->IsInCombat())
-            return false;
+        if (player->IsInCombat() || player->GetMap()->IsBattleArena() || player->InBattleground())
+           return false;
+			
+
 
         float rangeCheck = 10.0f;
         if (player->FindNearestCreature(NPC_AUCTION_A, rangeCheck) ||

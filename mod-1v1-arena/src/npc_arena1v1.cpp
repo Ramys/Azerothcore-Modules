@@ -267,7 +267,7 @@ public:
         }
         break;
 
-        case 20: // Join Queue Arena (unrated)
+    /*    case 20: // Join Queue Arena (unrated)
         {
             if (Arena1v1CheckTalents(player) && JoinQueueArena(player, me, false) == false)
                 ChatHandler(player->GetSession()).SendSysMessage("Something went wrong when joining the queue.");
@@ -276,7 +276,7 @@ public:
             return true;
         }
         break;
-
+		*/
         case 3: // Leave Queue
         {
             WorldPacket Data;

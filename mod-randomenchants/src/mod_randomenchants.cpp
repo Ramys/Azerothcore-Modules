@@ -221,34 +221,34 @@ public:
 		switch (Quality)
 		{
 		case 0://grey
-			rarityRoll = rand_norm() * 25;
+			rarityRoll = 51 + rand_norm() * 5;
 			break;
 		case 1://white
-			rarityRoll = rand_norm() * 50;
+			rarityRoll = 56 + rand_norm() * 10;
 			break;
 		case 2://green
-			rarityRoll = 45 + (rand_norm() * 24);
+			rarityRoll = 52 + (rand_norm() * 15);
 			break;
 		case 3://blue
-			rarityRoll = 52 + (rand_norm() * 23);
+			rarityRoll = 52 + (rand_norm() * 35);
 			break;
 		case 4://purple
-			rarityRoll = 56 + (rand_norm() * 22);
+			rarityRoll = 56 + (rand_norm() * 25);
 			break;
 		case 5://orange
-			rarityRoll = 61;
+			rarityRoll = 61 + (rand_norm() * 30);
 			break;
 		}
 		if (rarityRoll < 0)
 			return -1;
 		int tier = 0;
-		if (rarityRoll <= 44)
+		if (rarityRoll <= 45)
 			tier = 1;
 		else if (rarityRoll <= 51)
 			tier = 2;
-		else if (rarityRoll <= 55)
+		else if (rarityRoll <= 61)
 			tier = 3;
-		else if (rarityRoll <= 60)
+		else if (rarityRoll <= 71)
 			tier = 4;
 		else
 			tier = 5;

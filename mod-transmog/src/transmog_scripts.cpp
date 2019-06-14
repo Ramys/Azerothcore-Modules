@@ -379,7 +379,7 @@ public:
         sT->DeleteFakeFromDB(it->GetGUIDLow());
     }
     
-    void OnLogin(Player* player)
+    void OnLogin(Player* player) 
     {
         uint64 playerGUID = player->GetGUID();
         sT->entryMap.erase(playerGUID);
