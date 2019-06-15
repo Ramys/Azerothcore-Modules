@@ -219,36 +219,36 @@ public:
 		uint32 Quality = item->GetTemplate()->Quality;
 		int rarityRoll = -1;
 		switch (Quality)
-		{
+            {
 		case 0://grey
-			rarityRoll = 51 + rand_norm() * 5;
+			rarityRoll = rand_norm() * 15;
 			break;
 		case 1://white
-			rarityRoll = 56 + rand_norm() * 10;
+			rarityRoll = rand_norm() * 25;
 			break;
 		case 2://green
-			rarityRoll = 52 + (rand_norm() * 15);
+			rarityRoll = 45 + (rand_norm() * 20);
 			break;
 		case 3://blue
-			rarityRoll = 52 + (rand_norm() * 35);
+			rarityRoll = 65 + (rand_norm() * 15);
 			break;
 		case 4://purple
-			rarityRoll = 56 + (rand_norm() * 25);
+			rarityRoll = 75 + (rand_norm() * 14);
 			break;
 		case 5://orange
-			rarityRoll = 61 + (rand_norm() * 30);
+			rarityRoll = 85;
 			break;
-		}
+            }
 		if (rarityRoll < 0)
 			return -1;
 		int tier = 0;
-		if (rarityRoll <= 45)
+		if (rarityRoll <= 44)
 			tier = 1;
-		else if (rarityRoll <= 51)
+		else if (rarityRoll <= 64)
 			tier = 2;
-		else if (rarityRoll <= 61)
+		else if (rarityRoll <= 74)
 			tier = 3;
-		else if (rarityRoll <= 71)
+		else if (rarityRoll <= 84)
 			tier = 4;
 		else
 			tier = 5;
