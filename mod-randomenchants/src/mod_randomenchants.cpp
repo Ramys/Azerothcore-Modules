@@ -59,10 +59,10 @@ bool Crafted = 1;
 bool Looted = 1;
 bool QuestReward = 1;
 uint32 HighQuality = 5;
-uint32 LowQuality = 1;
-uint32 Chance1 = 70;
+uint32 LowQuality = 0;
+uint32 Chance1 = 60;
 uint32 Chance2 = 65;
-uint32 Chance3 = 60;
+uint32 Chance3 = 70;
 
 class REConfig : public WorldScript
 {
@@ -97,9 +97,9 @@ public:
 		QuestReward = sConfigMgr->GetBoolDefault("RandomEnchants.OnQuestReward", 1);
 		HighQuality = sConfigMgr->GetIntDefault("RandomEnchants.HighQuality", 1);
 		LowQuality = sConfigMgr->GetIntDefault("RandomEnchants.LowQuality", 1);
-		Chance1 = sConfigMgr->GetIntDefault("RandomEnchants.Chance1", 70);
+		Chance1 = sConfigMgr->GetIntDefault("RandomEnchants.Chance1", 60);
 		Chance2 = sConfigMgr->GetIntDefault("RandomEnchants.Chance2", 65);
-		Chance3 = sConfigMgr->GetIntDefault("RandomEnchants.Chance3", 60);
+		Chance3 = sConfigMgr->GetIntDefault("RandomEnchants.Chance3", 70);
 
 		// Sanitize
 		if (HighQuality > 5) { HighQuality = 5; }
@@ -221,22 +221,22 @@ public:
 		switch (Quality)
             {
 		case 0://grey
-			rarityRoll = rand_norm() * 15;
+			rarityRoll = rand_norm() * 14;
 			break;
 		case 1://white
-			rarityRoll = rand_norm() * 25;
+			rarityRoll = rand_norm() * 15;
 			break;
 		case 2://green
-			rarityRoll = 45 + (rand_norm() * 20);
+			rarityRoll = 45 + (rand_norm() * 15);
 			break;
 		case 3://blue
-			rarityRoll = 65 + (rand_norm() * 15);
+			rarityRoll = 65 + (rand_norm() * 25);
 			break;
 		case 4://purple
-			rarityRoll = 75 + (rand_norm() * 14);
+			rarityRoll = 75 + (rand_norm() * 50);
 			break;
 		case 5://orange
-			rarityRoll = 85;
+			rarityRoll = 85 + (rand_norm() * 75);
 			break;
             }
 		if (rarityRoll < 0)
